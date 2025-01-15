@@ -24,7 +24,7 @@ def emmit_event(event):
     print("Event {} emitted".format(event.name))
 
 class Student:
-    def __init_(self, name, transcript_note):
+    def __init__(self, name, transcript_note):
         self.name = name
         self.transcript_note = transcript_note
 
@@ -56,5 +56,16 @@ class University:
                     print("{} got rejected from {} with the note {}".format(name, self.name, transcript_note))
             else:
                 print("unsupported event type")
-                
+
+student1 = Student("aykut",4.5)
+student2 = Student("yavuz",3.5)
+university1 = University("Ata",4)
+
+student1.apply_for_uni()
+
+university1.handle_application()
+
+student2.apply_for_uni()
+
+university1.handle_application()
 
