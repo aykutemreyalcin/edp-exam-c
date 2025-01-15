@@ -33,3 +33,4 @@ class Student:
         event = ApplicationSent(payload)
         emmit_event(event)
         
+test
