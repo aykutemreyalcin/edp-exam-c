@@ -32,5 +32,10 @@ class Student:
         payload = {"name":self.name, "transcript_note":self.transcript_note}
         event = ApplicationSent(payload)
         emmit_event(event)
-        
-test
+    
+class University:
+    def __init__(self, name, accepted_note):
+        self.name = name
+        self.accepted_note = accepted_note
+    
+    
