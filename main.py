@@ -32,10 +32,29 @@ class Student:
         payload = {"name":self.name, "transcript_note":self.transcript_note}
         event = ApplicationSent(payload)
         emmit_event(event)
-    
+
 class University:
     def __init__(self, name, accepted_note):
         self.name = name
         self.accepted_note = accepted_note
     
-    
+    def handle_application(self):
+        if communication_queue:
+            event = communication_queue.pop(-1)
+            if isinstance(event, ApplicationSent):
+                name = event.payload["name"]
+                transcript_note = event.payload["transcript_note"]
+                if transcript_note >= self.accepted_note:
+                    payload = {"name":name, "transcript_note":transcript_note}
+                    event = ApplicationAccepted(payload)
+                    emmit_event(event)
+                    print("{} got accepted to {} with the note {}".format(name, self.name, transcript_note))
+                else:
+                    payload = {"name":name, "transcript_note":transcript_note}
+                    event = ApplicationRejected(payload)
+                    emmit_event(event)
+                    print("{} got rejected from {} with the note {}".format(name, self.name, transcript_note))
+            else:
+                print("unsupported event type")
+                
+
