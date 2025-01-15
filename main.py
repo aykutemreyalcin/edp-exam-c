@@ -16,4 +16,9 @@ class ApplicationRejected(Event):
     name = "application_rejected"
     def __init__(self, payload):
         super().__init__(payload)
-   
+
+communication_queue = []
+
+def emmit_event(event):
+    communication_queue.append(event)
+    print("Event {} emitted".format(event.name))
